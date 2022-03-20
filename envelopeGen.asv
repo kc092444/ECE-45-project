@@ -1,6 +1,6 @@
 function envMatrix = envelopeGen(attack_length, decay_length, sustain, release_length, note_length)
 
-% Script created by Natalie Sigurdson, edited by Ruilin Hu
+% Script created by Natalie Sigurdson
 
 attack_length = attack_length*note_length;
 decay_length = decay_length*note_length;
@@ -20,14 +20,10 @@ f2 = @(x) ((decay_target - attack_target)/decay_length)*x - ((attack_length*(dec
 f3 = @(x) decay_target;
 f4 = @(x) (-decay_target/release_length)*x - (-decay_target/release_length)*sustain_end + decay_target;
 
+% Edited b
 % syms x
 % y = piecewise(0<x<attack_length, f1, attack_length<x<decay_end, f2, decay_end<x<sustain_end, f3, sustain_end<x<note_length, f4);
-% this is for testing:
-% fplot(y, [0,note_length])
 
-% edits: removed symbolic calculations and replaced with a discrete matrix
-% for faster processing on computers.
-% Edited by Ruilin Hu
 envMatrix = zeros(note_length,1); 
 for i = 1:note_length
     result = 0;
@@ -46,5 +42,6 @@ end
 end
 
 end
-
+% this is for testing:
+% fplot(y, [0,note_length])
 
