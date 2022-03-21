@@ -1,4 +1,4 @@
-function makePianoSound(waveform, envelope, noteFrequency, volume, length)
+function makePianoSound(waveform, envelope, tremolo, noteFrequency, volume, length)
 % makePianoSound(waveform, envelope, frequency, volume, length) by Ruilin Hu
 % func waveform = generated waveform from sine, tri, saw, and sqaure
 % func envelop = ADSR envelope
@@ -22,6 +22,7 @@ outputWaveFinal = @(t) outputWaveFinal(t);
 soundMatrix = zeros(length,1); %soundMatrix is lengthx1 matrix with all zeroes
 for i = 1:length %interate from leftmost column to right, middle number is step size
     result = outputWaveFinal(i) * envelope(i);
+    result = result * tremolo(i);
     result = result*volume/100;
     soundMatrix(i, 1) = result;
 end
