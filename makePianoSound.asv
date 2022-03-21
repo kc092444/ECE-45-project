@@ -14,22 +14,16 @@ function makePianoSound(waveform, envelope, tremolo, noteFrequency, lowPass, hig
 % reference: https://www.mathworks.com/help/signal/ref/sawtooth.html
 
 outputWave = @(t) waveform(t); %outputWave = waveform * envelope
-
 outputWaveFund = @(t)  outputWave(t*noteFrequency/(2*pi));
-
-if noteFrequency*2 <= highPass && noteFrequency*2 >= lowPass
+if noteFrequency*2 <= highPass;
 outputWaveFinal = @(t) 0.15*outputWaveFund(t*2);
 end
-if noteFrequency*3 <= highPass && noteFrequency*3 >= lowPass
-outputWaveFinal = @(t) outputWaveFinal(t) + 0.1*outputWaveFund(t*3);
+if noteFrequency*3 <= highPass;
+outputWaveFinal = @(t) 0.15*outputWaveFund(t*2);
 end
-if noteFrequency*4 <= highPass && noteFrequency*4 >= lowPass
-outputWaveFinal = @(t) outputWaveFinal(t) + 0.05*outputWaveFund(t*4);
-end
-
-if noteFrequency <= highPass && noteFrequency >= lowPass
++ 0.1*outputWaveFund(t*3) + 0.05*outputWaveFund(t*4);
 outputWaveFinal = @(t) 0.7*outputWaveFund(t) + outputWaveFinal(t);
-end
+outputWaveFinal = @(t) outputWaveFinal(t);
 
 soundMatrix = zeros(length,1); %soundMatrix is lengthx1 matrix with all zeroes
 for i = 1:length %interate from leftmost column to right, middle number is step size
