@@ -35,8 +35,17 @@ for i = 1:length
     soundMatrix(i, 1) = outputWaveFinal(i);
 end
 
-% finalSoundMatrix = LowPassFilter(soundMatrix, length, 10400, lowPass);
-finalSoundMatrix = soundMatrix;
+% implement below after filters are done
+if lowPass ~= 0 && highPass ==0
+    finalSoundMatrix = LowPassFilter(soundMatrix, length, 10400, lowPass);
+elseif lowPass == 0 && highPass ~= 0
+    % finalSoundMatrix = HighPassFilter(soundMatrix, length, 10400, highPass);
+elseif lowPass ~= 0 && highPass ~= 0
+    % finalSoundMatrix = BandPassFilter(soundMatrix, length, 10400, lowPass, highPass);
+else
+    finalSoundMatrix = soundMatrix;
+end
+% implement above after filters are done
 
 for i = 1:length %interate from leftmost column to right, middle number is step size
     result = finalSoundMatrix(i, 1) * envelope(i); %, 1);
