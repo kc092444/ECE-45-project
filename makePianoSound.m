@@ -36,12 +36,16 @@ for i = 1:length
 end
 
 % implement below after filters are done
-if lowPass ~= 0 && highPass ==0
-    finalSoundMatrix = LowPassFilter(soundMatrix, length, 10400, lowPass);
+if lowPass ~= 0 && highPass == 0
+    lowPassingFrequency = (100 - lowPass)*(2793.83 - 16.35)/100 + 16;
+    finalSoundMatrix = LowPassFilter(soundMatrix, length, 10400, lowPassingFrequency);
 elseif lowPass == 0 && highPass ~= 0
-    % finalSoundMatrix = HighPassFilter(soundMatrix, length, 10400, highPass);
+    highPassingFrequency = (highPass)*(2793.83 - 16.35)/100 + 16;
+    % finalSoundMatrix = HighPassFilter(soundMatrix, length, 10400,  highPassingFrequency);
 elseif lowPass ~= 0 && highPass ~= 0
-    % finalSoundMatrix = BandPassFilter(soundMatrix, length, 10400, lowPass, highPass);
+    lowPassingFrequency = (100 - lowPass)*(2793.83 - 16.35)/100 + 16;
+    highPassingFrequency = (highPass)*(2793.83 - 16.35)/100 + 16;
+    % finalSoundMatrix = BandPassFilter(soundMatrix, length, 10400, lowPassingFrequency, highPassingFrequency);
 else
     finalSoundMatrix = soundMatrix;
 end
