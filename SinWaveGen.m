@@ -1,9 +1,8 @@
-function y = SinWaveGen(amp, freq)
+function y = SinWaveGen(amp)
 
-w = 2*pi*freq; 
-t = 0:10000;
+w = 1;
 
-y = amp * sin(w * t);
+y = amp * sin(w*t);
 
 end
 

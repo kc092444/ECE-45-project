@@ -1,11 +1,9 @@
-function y = SqrWaveGen(amp, freq)
+function y = SqrWaveGen(amp)
 
-sqr_w = 2*pi*freq; % Square wave frequency 
-t = 0:10000;
-duty = 50;  % Square wave is on and off for equal amt of time
-
-y = amp * square(2*pi*sqr_w*t, duty);
+y = amp * sign(sin(t));
 
 end
 
 % written by Kamran Mapar
+% Square wave equation: https://en.wikipedia.org/wiki/Square_wave
+% Sgn function in MATLAB: https://www.mathworks.com/help/matlab/ref/sign.html
