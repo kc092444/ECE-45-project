@@ -1,8 +1,12 @@
 function makePianoSound(waveform, envelope, tremolo, noteFrequency, lowPass, highPass, volume, length)
 % makePianoSound by Ruilin Hu
+
 % func waveform = generated waveform from sine, tri, saw, and sqaure
-% func envelop = ADSR envelope
+% matrix envelop = ADSR envelope
+% func tremolo = tremolo function generated from sliders
 % int noteFrequency = determined by Octave value & keys pressed
+% int lowPass = highest frequency allowed in sound
+% int highPass = lowest frequency allowed in sound
 % int volume = volume slider value
 % int length = how long the note should be played
 % When a key on the keyboard is pressed, this function multiplies
