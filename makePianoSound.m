@@ -16,27 +16,24 @@ function makePianoSound(waveform, envelope, tremolo, noteFrequency, lowPass, hig
 outputWave = @(t) waveform(t); %outputWave = waveform * envelope
 
 outputWaveFund = @(t)  outputWave(t*noteFrequency/(2*pi));
-
-if noteFrequency*2 <= highPass && noteFrequency*2 >= lowPass
 outputWaveFinal = @(t) 0.15*outputWaveFund(t*2);
-end
-if noteFrequency*3 <= highPass && noteFrequency*3 >= lowPass
 outputWaveFinal = @(t) outputWaveFinal(t) + 0.1*outputWaveFund(t*3);
-end
-if noteFrequency*4 <= highPass && noteFrequency*4 >= lowPass
 outputWaveFinal = @(t) outputWaveFinal(t) + 0.05*outputWaveFund(t*4);
-end
-
-if noteFrequency <= highPass && noteFrequency >= lowPass
 outputWaveFinal = @(t) 0.7*outputWaveFund(t) + outputWaveFinal(t);
-end
 
 soundMatrix = zeros(length,1); %soundMatrix is lengthx1 matrix with all zeroes
+
+for i = 1:length
+    soundMatrix(i, 1) = outputWaveFinal(i);
+end
+
+finalSoundMatrix = LowPassFilter(soundMatrix, length, 10400, lowPass);
+
 for i = 1:length %interate from leftmost column to right, middle number is step size
-    result = outputWaveFinal(i) * envelope(i);
+    result = finalSoundMatrix(i, i) * envelope(i, 1);
     result = result * tremolo(i);
     result = result*volume/100;
-    soundMatrix(i, 1) = result;
+    finalsoundMatrix(i, 1) = result;
 end
-sound(soundMatrix, 10400);
+sound(finalsoundMatrix, 10400);
 end
