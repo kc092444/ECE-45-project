@@ -1,4 +1,4 @@
-function makePianoSound(waveform, envelope, tremolo, noteFrequency, lowPass, highPass, volume, length)
+function makePianoSound(waveform, envelope, tremolo, noteFrequency, lowPass, highPass, reject, volume, length)
 % makePianoSound by Ruilin Hu
 
 % func waveform = generated waveform from sine, tri, saw, and sqaure
@@ -42,12 +42,14 @@ if lowPass ~= 0 && highPass == 0
 elseif lowPass == 0 && highPass ~= 0
     highPassingFrequency = (highPass)*(2793.83 - 16.35)/100 + 16;
     finalSoundMatrix = HighPassFilter(soundMatrix, length, 10400,  highPassingFrequency);
-elseif lowPass ~= 0 && highPass ~= 0
+elseif lowPass ~= 0 && highPass ~= 0 && reject == 0
     lowPassingFrequency = (100 - lowPass)*(2793.83 - 16.35)/100 + 16;
     highPassingFrequency = (highPass)*(2793.83 - 16.35)/100 + 16;
-    % finalSoundMatrix = HighPassFilter(soundMatrix, length, length*10,  highPassingFrequency);
-    % finalSoundMatrix = LowPassFilter(soundMatrix, length, length*10, lowPassingFrequency);
     finalSoundMatrix = BandPassFilter(soundMatrix, length, length*10, highPassingFrequency, lowPassingFrequency);
+elseif lowPass ~= 0 && highPass ~= 0 && reject ~= 0
+    lowPassingFrequency = (100 - lowPass)*(2793.83 - 16.35)/100 + 16;
+    highPassingFrequency = (highPass)*(2793.83 - 16.35)/100 + 16;
+    finalSoundMatrix = BandRejectFilter(soundMatrix, length, length*10, highPassingFrequency, lowPassingFrequency);
 else
     finalSoundMatrix = soundMatrix;
 end
