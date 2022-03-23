@@ -22,9 +22,9 @@ end
 if lowPass ~= 0 && highPass ==0
     finalSoundMatrix = LowPassFilter(soundMatrix, length, 10400, lowPass);
 elseif lowPass == 0 && highPass ~= 0
-    % finalSoundMatrix = HighPassFilter(soundMatrix, length, 10400, highPass);
+    finalSoundMatrix = HighPassFilter(soundMatrix, length, 10400, highPass);
 elseif lowPass ~= 0 && highPass ~= 0
-    % finalSoundMatrix = BandPassFilter(soundMatrix, length, 10400, lowPass, highPass);
+    finalSoundMatrix = BandPassFilter(soundMatrix, length, 10400, lowPass, highPass);
 else
     finalSoundMatrix = soundMatrix;
 end
