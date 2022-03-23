@@ -1,4 +1,4 @@
-function makeSound(waveform, envelope, tremolo, frequency, volume, length)
+function makeFileSound(fileSoundMatrix, envelope, tremolo, frequency, volume, length)
 % makeSound(waveform, envelope, frequency, volume, length) by Ruilin Hu
 % func waveform = generated waveform from sine, tri, saw, and sqaure
 % func envelop = ADSR envelope, now in matrix
@@ -21,12 +21,11 @@ function makeSound(waveform, envelope, tremolo, frequency, volume, length)
 % length = 10000;
 % test code above, remove when finished
 
-outputWave = @(t) waveform(t); %outputWave = waveform
-outputWaveFinal = @(t) outputWave(t*frequency/(2*pi));
+% outputWaveFinal = @(t) outputWave(t*frequency/(2*pi));
 soundMatrix = zeros(length,1); %soundMatrix is lengthx1 matrix with all zeroes
-for i = 1:length %interate from leftmost column to right, middle number is step size
+for i = 1:length:(frequency/(2*pi)) %interate from leftmost column to right, middle number is step size
     envelopeValue = envelope(i, 1);
-    result = outputWaveFinal(i) * envelopeValue;
+    result = fileSoundMatrix(i, 1) * envelopeValue;
     result = result * tremolo(i);
     result = result*volume/100;
     soundMatrix(i, 1) = result;
