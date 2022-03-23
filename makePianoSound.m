@@ -45,7 +45,9 @@ elseif lowPass == 0 && highPass ~= 0
 elseif lowPass ~= 0 && highPass ~= 0
     lowPassingFrequency = (100 - lowPass)*(2793.83 - 16.35)/100 + 16;
     highPassingFrequency = (highPass)*(2793.83 - 16.35)/100 + 16;
-    finalSoundMatrix = BandPassFilter(soundMatrix, length, 10400, lowPassingFrequency, highPassingFrequency);
+    % finalSoundMatrix = HighPassFilter(soundMatrix, length, length*10,  highPassingFrequency);
+    % finalSoundMatrix = LowPassFilter(soundMatrix, length, length*10, lowPassingFrequency);
+    finalSoundMatrix = BandPassFilter(soundMatrix, length, length*10, highPassingFrequency, lowPassingFrequency);
 else
     finalSoundMatrix = soundMatrix;
 end
