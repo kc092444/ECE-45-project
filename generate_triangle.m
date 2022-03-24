@@ -1,4 +1,4 @@
-function y = generate_triangle(amp, period)
+function y = generate_triangle(amp)
 %generate_sawtooth: returns a function of triangle wave
 
     % period of the triangle waveform

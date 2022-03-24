@@ -1,4 +1,4 @@
-function y = generate_sawtooth(amp, period)
+function y = generate_sawtooth(amp)
 % generate_sawtooth: returns a function of sampled sawtooth wave
 
 
