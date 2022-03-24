@@ -1,23 +1,30 @@
-function makeDrumSound(waveform, envelope, tremolo, noteFrequency, lowPass, highPass, reject, volume, length)
-% makeDrumSound by (Averi) Zhizhen Yu
+function makeElectricGuitarSound(waveform, envelope, tremolo, noteFrequency, lowPass, highPass, reject, volume, length)
+% This file mimics the sound of electric guitar.
 
+% Author: Zhizhen (Averi) Yu
+% The data and tremolo effects in making the electric guitar sound
+% are created by Zhizhen (Averi) Yu.
 
-s = @(t) 0.955*sin(t) + 0.02*sawtooth(t, 1/2) + 0.025*square(t);
-% Change the waveform above to change how instrument "sounds"
+% If you run the test file testElectricGuitarSound, the file particulary 
+% generally mimics the sound of electric guitar for rock songs. 
+
+s = @(t) 0.039*sin(t) + 0.9*sawtooth(t, 1/7) + 0.005*square(t);
+% Waveform chan
 outputWave = s; %outputWave = waveform * envelope
 
 outputWaveFund = @(t)  outputWave(t*noteFrequency/(2*pi));
-outputWaveFinal = @(t) 0.15*outputWaveFund(t*2);
-outputWaveFinal = @(t) 0.1*outputWaveFund(t*3) + outputWaveFinal(t);
-outputWaveFinal = @(t) 0.05*outputWaveFund(t*4) + outputWaveFinal(t);
+outputWaveFinal = @(t) 0.3*outputWaveFund(t*2);
+outputWaveFinal = @(t) 0.9*outputWaveFund(t*3) + outputWaveFinal(t);
+outputWaveFinal = @(t) 0.1*outputWaveFund(t*4) + outputWaveFinal(t);
 % outputWaveFinal = @(t) 0.09*outputWaveFund(t*5) + outputWaveFinal(t);
-% feel free to add more
-outputWaveFinal = @(t) 0.7*outputWaveFund(t) + outputWaveFinal(t);
+tremoloMod = tremoloGen(90, 8);
+TremoutputWaveFinal = @(t) (0.7*outputWaveFund(t) + outputWaveFinal(t)).*tremoloMod(t);
 
+% The following codes to make sound by Ruilin Hu.
 soundMatrix = zeros(length,1); %soundMatrix is lengthx1 matrix with all zeroes
 
 for i = 1:length
-    soundMatrix(i, 1) = outputWaveFinal(i);
+    soundMatrix(i, 1) = TremoutputWaveFinal(i);
 end
 
 % implement below after filters are done
