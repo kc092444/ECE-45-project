@@ -1,4 +1,5 @@
-% plotBandPassFilter(Len, High_cut, Low_cut)
+% This file outputs an array of the band pass filter to plot. 
+% This file is authored by Zhizhen (Averi) Yu and co-commented by HaoZhang Chu. 
 
 % Len = the length of input_wav
 % High_cut = the higher boundary frequency for a Band Pass Filt
