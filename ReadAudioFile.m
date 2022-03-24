@@ -4,7 +4,7 @@ function [AudioValues, FsOut] = ReadAudioFile(FileDestination, NoteLength)
 clear y Fs
 info = audioinfo(FileDestination);
 [y,Fs] = audioread(FileDestination);
-
+ 
 if(NoteLength > length(y))
     [rowsize,colsize] = size(y);
     ZeroMatrix = zeros(NoteLength, colsize);
@@ -21,13 +21,13 @@ info = audioinfo('AudioWithCorrectedFreq.wav');
 [y,Fs] = audioread('AudioWithCorrectedFreq.wav');
 x = y(:,1);
 AudioValues = x;
-sound(x,Fs);
+%sound(x,Fs);
 
 t = 0:seconds(1/Fs):seconds(info.Duration);
 t = t(1:end-1);
-plot(t,x)
-xlabel('Time')
-ylabel('Audio Signal')
+%plot(t,x)
+%xlabel('Time')
+%ylabel('Audio Signal')
 
 FsOut = Fs;
 end
