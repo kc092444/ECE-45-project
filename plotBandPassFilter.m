@@ -18,7 +18,7 @@ function output = plotBandPassFilter(Len, High_cut, Low_cut)
 %High_cut = 2000;
 
     f = (1:Len)*(Fs/Len);
-    
+
     output = zeros([Len 1]);
 
     for i = 1:Len
@@ -29,5 +29,5 @@ function output = plotBandPassFilter(Len, High_cut, Low_cut)
         end
     end
 
-% plot(f, output)
+%plot(f, output)
 end
