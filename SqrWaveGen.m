@@ -1,6 +1,6 @@
 function y = SqrWaveGen(amp)
 
-y = amp * sign(sin(t));
+y = @(t) amp * sign(sin(t));
 
 end
 

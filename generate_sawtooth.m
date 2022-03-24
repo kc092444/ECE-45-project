@@ -1,4 +1,4 @@
-function y = generate_sawtooth(amp, period)
+function y = generate_sawtooth(amp)
 % generate_sawtooth: returns a function of sampled sawtooth wave
 
 
@@ -6,7 +6,7 @@ function y = generate_sawtooth(amp, period)
      period = 2 * pi; 
     
    % equation of sawtooth function
-    y = -(2 * amp / pi) * atan(cot(pi * t / period));
+    y = @(t) -(2 * amp / pi) * atan(cot(pi * t / period));
 
 end
 % written by Yiyang Chen 
