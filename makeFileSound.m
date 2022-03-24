@@ -60,5 +60,5 @@ for i = 1:length %interate from leftmost column to right, middle number is step 
     outputsoundMatrix(i, 1) = result;
 end
 
-sound(outputsoundMatrix, 20800);
+sound(outputsoundMatrix, 104000);
 end
