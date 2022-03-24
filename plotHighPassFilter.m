@@ -1,4 +1,5 @@
-% plotHighPassFilter(Len, High_cut)
+% This file outputs an array of the high pass filter to plot. 
+% This file authored by Zhizhen (Averi) Yu and co-commented by HaoZhang Chu. 
 
 % Len = the length of input_wav
 % High_cut = the frequency below the High_cut will be cut, whil
