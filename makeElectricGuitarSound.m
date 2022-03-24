@@ -8,17 +8,22 @@ function makeElectricGuitarSound(waveform, envelope, tremolo, noteFrequency, low
 % If you run the test file testElectricGuitarSound, the file particulary 
 % generally mimics the sound of electric guitar for rock songs. 
 
-s = @(t) 0.039*sin(t) + 0.9*sawtooth(t, 1/7) + 0.005*square(t);
+% s = @(t) 0.039*sin(t) + 0.9*sawtooth(t, 1/7) + 0.005*square(t);
+Sinemix = SinWaveGen(0.2);
+Squaremix = SqrWaveGen(0.3);
+Trianglemix = generate_triangle(0.5);
+% Sawmix = generate_sawtooth(0.9);
+s = @(t) Sinemix(t) + Squaremix(t) + Trianglemix(t); % + Sawmix(t);
 % Waveform chan
 outputWave = s; %outputWave = waveform * envelope
 
 outputWaveFund = @(t)  outputWave(t*noteFrequency/(2*pi));
 outputWaveFinal = @(t) 0.3*outputWaveFund(t*2);
-outputWaveFinal = @(t) 0.9*outputWaveFund(t*3) + outputWaveFinal(t);
+outputWaveFinal = @(t) 0.6*outputWaveFund(t*3) + outputWaveFinal(t);
 outputWaveFinal = @(t) 0.1*outputWaveFund(t*4) + outputWaveFinal(t);
 % outputWaveFinal = @(t) 0.09*outputWaveFund(t*5) + outputWaveFinal(t);
 tremoloMod = tremoloGen(90, 8);
-TremoutputWaveFinal = @(t) (0.7*outputWaveFund(t) + outputWaveFinal(t)).*tremoloMod(t);
+TremoutputWaveFinal = @(t) (0.7*outputWaveFund(t)).*tremoloMod(t);
 
 % The following codes to make sound by Ruilin Hu.
 soundMatrix = zeros(length,1); %soundMatrix is lengthx1 matrix with all zeroes
