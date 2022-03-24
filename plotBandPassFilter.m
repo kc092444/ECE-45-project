@@ -29,5 +29,5 @@ function output = plotBandPassFilter(Len, High_cut, Low_cut)
         end
     end
 
-plot(f, output)
+% plot(f, output)
 end
