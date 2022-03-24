@@ -6,7 +6,7 @@ function y = generate_sawtooth(amp)
      period = 2 * pi; 
     
    % equation of sawtooth function
-    y = -(2 * amp / pi) * atan(cot(pi * t / period));
+    y = @(t) -(2 * amp / pi) * atan(cot(pi * t / period));
 
 end
 % written by Yiyang Chen 

@@ -5,7 +5,7 @@ function y = generate_triangle(amp)
     period = 2 * pi;
     
     % equation of the triangle waveform
-    y = amp * abs(mod(t - 1, period) - (period / 2)) - amp;
+    y = @(t) amp * abs(mod(t - 1, period) - (period / 2)) - amp;
 
 end
 
